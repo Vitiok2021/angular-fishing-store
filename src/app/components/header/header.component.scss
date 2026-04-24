@@ -1,0 +1,254 @@
+.header {
+  background-color: #2c3e50;
+
+  &__container {
+    padding-block: 20px;
+  }
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  &__logo {
+    position: relative;
+    z-index: 5;
+    color: #e1e7eb;
+    font-weight: 600;
+  }
+
+  &__search {
+  }
+
+  &__cart {
+  }
+
+  &__menu {
+    flex-grow: 1;
+  }
+  &__admin {
+    cursor: pointer;
+    color: #e1e7eb;
+    transition: color 0.3s ease 0s;
+    @media (any-hover: hover) {
+      &:hover {
+        color: #bba5f1;
+      }
+    }
+  }
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+}
+
+.menu-header {
+  padding-block: 15px;
+  @media (width <= 768px) {
+    order: 3;
+  }
+  &__icon {
+    display: none;
+    @media (max-width: 767.98px) {
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 18px;
+      z-index: 5;
+      @media (any-hover: hover) {
+        &:hover {
+          cursor: default;
+        }
+      }
+      span,
+      &::before,
+      &::after {
+        content: "";
+        transition: all 0.3s ease;
+        right: 0;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #e6b800;
+      }
+      &::before {
+        top: 0;
+      }
+      &::after {
+        bottom: 0;
+      }
+      span {
+        top: calc(50% - 1px);
+      }
+      .menu-open & {
+        span {
+          width: 0;
+        }
+        &::before {
+          top: calc(50% - 1px);
+          transform: rotate(-45deg);
+        }
+        &::after {
+          top: calc(50% - 1px);
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
+  &__body {
+    @media (width <= 768px) {
+      padding: 111px 15px 25px 15px;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 100%;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      row-gap: 40px;
+      background-color: #bba5f1;
+      transition: left 0.5s ease 0s;
+      &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 88px;
+        background-color: #d1c3f5;
+        z-index: 2;
+        transition: left 0.5s ease 0s;
+      }
+      .menu-open & {
+        left: 0;
+        &::before {
+          left: 0;
+        }
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 3px;
+    @media (width <= 768px) {
+      flex: 1 1 auto;
+      font-size: 28px;
+      align-items: flex-end;
+      flex-direction: column;
+      row-gap: 25px;
+    }
+  }
+
+  &__item {
+  }
+
+  &__link {
+    color: #e1e7eb;
+    font-weight: 600;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #e1e7eb;
+  transition: color 0.3s ease;
+  @media (width <= 768px) {
+    margin-left: auto;
+    margin-right: 15px;
+    order: 2;
+  }
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+  &__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+
+  &__text {
+    font-weight: 600;
+    @media (max-width: 767.98px) {
+      display: none;
+    }
+  }
+}
+.active {
+  color: var(--color-primary);
+}
+.header__favorites {
+  position: relative; /* Це якір для нашого бейджа */
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  &-link {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    transition: color 0.3s ease 0s;
+    @media (any-hover: hover) {
+      &:hover {
+        color: #bba5f1;
+      }
+    }
+  }
+  &-badge {
+    position: absolute;
+    top: -8px; /* Піднімаємо вище тексту */
+    right: -15px; /* Зсуваємо правіше */
+
+    background-color: #e74c3c; /* Червоний колір привертає увагу */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+
+    /* Робимо ідеальний кружечок */
+    height: 20px;
+    min-width: 20px;
+    border-radius: 10px;
+
+    /* Центруємо цифру всередині кружечка */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px; /* Щоб цифри типу "10+" не сплющувались */
+  }
+}

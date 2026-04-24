@@ -1,0 +1,52 @@
+<div class="cart-backdrop" (click)="closeCart()" [class.show]="isOpen"></div>
+
+<div class="cart-sidebar" [class.open]="isOpen">
+  <div class="cart-header">
+    <h2>Мій кошик</h2>
+    <button class="close-btn" (click)="closeCart()">✕</button>
+  </div>
+
+  <div class="cart-body">
+    @for (item of cartItems; track item.id) {
+      <div class="cart-item">
+        <div class="cart-item__image">
+          <img [src]="item.imageUrl" alt="{{ item.title }}" />
+        </div>
+
+        <div class="cart-item__details">
+          <h3 class="cart-item__title">{{ item.title }}</h3>
+          <p class="cart-item__price">{{ item.price * item.quantity }} грн</p>
+
+          <div class="cart-item__actions">
+            <div class="cart-item__quantity-controls">
+              <button (click)="cartService.updateQuantity(item.id, -1)">
+                -
+              </button>
+              <span>{{ item.quantity }} шт.</span>
+              <button (click)="cartService.updateQuantity(item.id, 1)">
+                +
+              </button>
+            </div>
+
+            <button
+              class="cart-item__remove"
+              (click)="cartService.removeFromCart(item.id)"
+            >
+              Видалити
+            </button>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-cart">
+        <p>Кошик порожній</p>
+      </div>
+    }
+  </div>
+  <p>Загальна сума: {{ cartService.totalPrice$ | async }} грн</p>
+  @if (cartItems.length > 0) {
+    <button class="checkout-btn" (click)="goToCheckout()">
+      Перейти до оплати
+    </button>
+  }
+</div>

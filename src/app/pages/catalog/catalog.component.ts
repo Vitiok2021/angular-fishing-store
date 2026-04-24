@@ -1,0 +1,26 @@
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { ProductCard } from '../../interfaces/product-card';
+import { ProductService } from '../../services/product.service';
+import { HeroComponent } from '../../components/hero/hero.component';
+import { CartService } from '../../services/cart.service';
+import { ProductDetails } from '../../interfaces/product-details';
+
+@Component({
+  selector: 'app-catalog',
+  imports: [ProductCardComponent, AsyncPipe, HeroComponent],
+  templateUrl: './catalog.component.html',
+  styleUrl: './catalog.component.scss',
+})
+export class CatalogComponent implements OnInit {
+  productService = inject(ProductService);
+  // fishingProducts: Observable<ProductCard[]> =
+  //   this.productService.getProducts();
+  fishingProducts = this.productService.products$;
+
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe();
+  }
+}
